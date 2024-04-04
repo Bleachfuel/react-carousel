@@ -12,6 +12,18 @@ This carousel component provides a versatile and performant solution for display
 - **Automatic Pagination (Optional) (⏱️ Set it and Forget it):** Allows automatic page transitions after a defined interval, providing a hands-free browsing experience.
 - **Counter Display (Optional) ( Keep Track 🚨):** Displays a counter indicating the current page and total number of items, giving users a clear understanding of their position within the carousel.
 
+
+##  **✨NEW FEATURE (SetLoading 🤩)✨**
+> Ability to get state changes from the `carousel` everytime it loads new content 🚀🔄. 
+> 
+> - **`setLoading` (function):** Optional useState function that you can pass. The `carousel` will return 
+> `false` each time it paginates.
+
+<br>
+<br>
+<br>
+
+
 **Installation:**
 
 Install the `Carousel` component using npm:
@@ -41,6 +53,7 @@ function MyComponent() {
 }
 ```
 
+
 **Customization Options:**
 - **`className` (string):** Add an additional CSS class name for styling purposes.
 - **`drag` (boolean, default: `true`):** Enable or disable dragging/swiping functionality.
@@ -60,7 +73,7 @@ function MyComponent() {
     - Second element (number): Interval duration in seconds (defaults to `0`).
 - **`intervalActive` (boolean, default: `true`):** Useful for controlling the interval. I.E stop the interval when hovering over something. 
 - **`setLoading` (function):** Optional useState function that you can pass. The component will return 
-`false` each time it paginates. More information below.
+`false` each time it paginates. More information down below.
 
 **Example with Customization:**
 
@@ -107,7 +120,9 @@ function MyComponent() {
 
 }
 ```
-`IMPORTANT` Each time you press the controls or drag the carousel, the component will set loading to `true`
+**⚠️IMPORTANT⚠️:** Each time you press the controls or drag the `carousel`, the `carousel` will set loading to `true`
+
+
 **Contributing:**
 
 I welcome contributions to improve this component! Feel free to submit pull requests or create issues on the project's GitHub repository [Github.com/Bleachfuel/react-carousel](https://github.com/Bleachfuel/react-carousel) 🤗.

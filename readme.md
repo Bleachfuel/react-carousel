@@ -1,5 +1,5 @@
 
-> **✨ React Responsive Framer Motion Carousel ✨**
+## ✨ React Responsive Framer Motion Carousel ✨
 
 This carousel component provides a versatile and performant solution for displaying content or images within your React applications. It offers intuitive features that enhance user experience and empower developers with granular control over customization.
 
@@ -73,7 +73,7 @@ function MyComponent() {
     - Second element (number): Interval duration in seconds (defaults to `0`).
 - **`intervalActive` (boolean, default: `true`):** Useful for controlling the interval. I.E stop the interval when hovering over something. 
 - **`setLoading` (function):** Optional useState function that you can pass. The component will return 
-`false` each time it paginates. More information down below.
+`true` each time it paginates. More information down below.
 
 **Example with Customization:**
 
@@ -120,7 +120,7 @@ function MyComponent() {
 
 }
 ```
-**⚠️IMPORTANT⚠️:** Each time you press the controls or drag the `carousel`, the `carousel` will set loading to `true`
+**⚠️IMPORTANT⚠️:** Each time you press the controls or drag the `carousel`, the `carousel` will set loading to `false`
 
 
 **Contributing:**

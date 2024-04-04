@@ -3,8 +3,27 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
 import { useEffect } from "react";
-import { variants } from "./variants";
 
+const variants = {
+    enter: (direction) => {
+        return {
+            x: direction > 0 ? 1000 : -1000,
+            opacity: 0
+        };
+    },
+    center: {
+        zIndex: 2,
+        x: 0,
+        opacity: 1
+    },
+    exit: (direction) => {
+        return {
+            zIndex: 0,
+            x: direction < 0 ? 1000 : -1000,
+            opacity: 0
+        };
+    }
+};
 
 /**
  * Carousel - A customizable carousel component for displaying images or content.
@@ -27,13 +46,31 @@ import { variants } from "./variants";
     - The first element (`interval[0]`) is a boolean flag (defaults to `false`) that determines whether automatic pagination is enabled.
     - The second element (`interval[1]`) is a number (defaults to `0`) that specifies the duration (in seconds) between automatic page transitions.
  * @param {boolean} [props.intervalActive=true] - A boolean flag (defaults to `true`) that controls whether the configured interval (if any) should be actively used. This provides further control over automatic pagination behavior.
- * @param {} [props.setLoading] - Optional: Declare a useState function inside here. Whenever the carousel loads, it returns false on the state. Useful for showing that images are being loaded.
+ * @param {} [props.setLoading] - Optional: Declare a useState function inside here. Whenever the carousel loads, it returns true on the state. Useful for showing that content is being loaded.
  * @returns {JSX.Element} The carousel component.
  */
 
-
-
-const Carousel = ({ setLoading, controls = true, swipeConfindence, intervalActive = true, children, className, drag = true, counter, interval = [false, 0], noExit = false }) => {
+    
+const Carousel = ({
+    setLoading,
+    controls = true,
+    swipeConfindence,
+    intervalActive = true,
+    children,
+    className,
+    drag = true,
+    counter,
+    interval = [false, 0],
+    noExit = false,
+}) => {
+    if (!children || React.Children.count(children) === 0) {
+        console.error("Carousel: No children provided. Please provide content or images to display within the carousel.");
+        return <div className="carousel-error">No content provided for the carousel.</div>;
+    }
+    if (interval && interval[0] < 0) {
+        console.error("Carousel: interval time is negative")
+        return <div className="carousel-error">Negative interval.</div>
+    }
     const [[page, direction], setPage] = useState([0, 0]);
     const pageCount = React.Children.count(children);
     const pageIndex = wrap(0, pageCount, page);
@@ -45,14 +82,16 @@ const Carousel = ({ setLoading, controls = true, swipeConfindence, intervalActiv
     };
 
     useEffect(() => {
-        if (interval[0]) {
-            let intervalId;
-            if (intervalActive) {
-                intervalId = setInterval(() => {
-                    paginate(1);
-                }, interval[1] * 1000);
+        if (interval) {
+            if (interval[0]) {
+                let intervalId;
+                if (intervalActive) {
+                    intervalId = setInterval(() => {
+                        paginate(1);
+                    }, interval[1] * 1000);
+                }
+                return () => clearInterval(intervalId);
             }
-            return () => clearInterval(intervalId);
         }
     }, [intervalActive, interval]);
 
@@ -97,11 +136,10 @@ const Carousel = ({ setLoading, controls = true, swipeConfindence, intervalActiv
             </AnimatePresence>
             {controls && (
                 <>
-                    <button onClick={paginate(1)}>Next</button>
-                    <button onClick={paginate(-1)}>Prev</button>
+                    <button name="next" className="next" onClick={() => paginate(1)}>Next</button>
+                    <button name="prev" className="prev" onClick={() => paginate(-1)}>Prev</button>
                 </>
-            )
-            }
+            )}
             {
                 counter && counter[0] && (
                     <span className="carousel-counter">{`${counter[1] ? counter[1] : ""} ${pageIndex + 1} / ${React.Children.toArray(children).length}`}</span>

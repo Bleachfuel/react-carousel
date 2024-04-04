@@ -1,5 +1,5 @@
 
-**✨ React Responsive Framer Motion Carousel ✨**
+> **✨ React Responsive Framer Motion Carousel ✨**
 
 This carousel component provides a versatile and performant solution for displaying content or images within your React applications. It offers intuitive features that enhance user experience and empower developers with granular control over customization.
 
@@ -42,7 +42,6 @@ function MyComponent() {
 ```
 
 **Customization Options:**
-
 - **`className` (string):** Add an additional CSS class name for styling purposes.
 - **`drag` (boolean, default: `true`):** Enable or disable dragging/swiping functionality.
 - **`controls` (boolean, default: `true`):** 
@@ -60,6 +59,8 @@ function MyComponent() {
     - First element (boolean): Enables automatic pagination (defaults to `false`).
     - Second element (number): Interval duration in seconds (defaults to `0`).
 - **`intervalActive` (boolean, default: `true`):** Useful for controlling the interval. I.E stop the interval when hovering over something. 
+- **`setLoading` (function):** Optional useState function that you can pass. The component will return 
+`false` each time it paginates. More information below.
 
 **Example with Customization:**
 
@@ -80,9 +81,36 @@ function MyComponent() {
 }
 ```
 
+**Example with loading**
+```javascript
+import Carousel from 'react-responsive-framer-motion-carousel';
+import { useState } from "react"
+
+function MyComponent() {
+  const [loading, setLoading] = useState(true)
+
+  // set loading to false when the image is loaded.
+  const handleLoad = () => {
+    setLoading(false)
+  }
+  return (
+    <>
+      {/*conditionally render loading if the content is being loaded*/}
+      {loading && "loading..."}
+      <Carousel setLoading={setLoading}>
+        <img onLoad={handleLoad} src="" alt="" />
+        <img onLoad={handleLoad} src="" alt="" />
+        <img onLoad={handleLoad} src="" alt="" />
+      </Carousel>
+    </>
+)
+
+}
+```
+`IMPORTANT` Each time you press the controls or drag the carousel, the component will set loading to `true`
 **Contributing:**
 
-I welcome contributions to improve this component! Feel free to submit pull requests or create issues on the project's GitHub repository [https://github.com/Bleachfuel/react-carousel] 🤗.
+I welcome contributions to improve this component! Feel free to submit pull requests or create issues on the project's GitHub repository [Github.com/Bleachfuel/react-carousel](https://github.com/Bleachfuel/react-carousel) 🤗.
 
 **License:**
 

@@ -27,12 +27,13 @@ import { variants } from "./variants";
     - The first element (`interval[0]`) is a boolean flag (defaults to `false`) that determines whether automatic pagination is enabled.
     - The second element (`interval[1]`) is a number (defaults to `0`) that specifies the duration (in seconds) between automatic page transitions.
  * @param {boolean} [props.intervalActive=true] - A boolean flag (defaults to `true`) that controls whether the configured interval (if any) should be actively used. This provides further control over automatic pagination behavior.
+ * @param {} [props.setLoading] - Optional: Declare a useState function inside here. Whenever the carousel loads, it returns false on the state. Useful for showing that images are being loaded.
  * @returns {JSX.Element} The carousel component.
  */
 
 
 
-const Carousel = ({ controls = true, swipeConfindence, intervalActive = true, children, className, drag = true, counter, interval = [false, 0], noExit = false }) => {
+const Carousel = ({ setLoading, controls = true, swipeConfindence, intervalActive = true, children, className, drag = true, counter, interval = [false, 0], noExit = false }) => {
     const [[page, direction], setPage] = useState([0, 0]);
     const pageCount = React.Children.count(children);
     const pageIndex = wrap(0, pageCount, page);
@@ -57,6 +58,7 @@ const Carousel = ({ controls = true, swipeConfindence, intervalActive = true, ch
 
     const paginate = (newDirection) => {
         setPage(prevState => [prevState[0] + newDirection, newDirection]);
+        if (setLoading) setLoading(true);
     };
     return (
         <>

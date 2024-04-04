@@ -82,7 +82,7 @@ function MyComponent() {
 
 **Contributing:**
 
-I welcome contributions to improve this component! Feel free to submit pull requests or create issues on the project's GitHub repository [link coming soon!] 🤗.
+I welcome contributions to improve this component! Feel free to submit pull requests or create issues on the project's GitHub repository [https://github.com/Bleachfuel/react-carousel] 🤗.
 
 **License:**
 

@@ -12,6 +12,11 @@ This carousel component provides a versatile and performant solution for display
 - **Automatic Pagination (Optional) (⏱️ Set it and Forget it):** Allows automatic page transitions after a defined interval, providing a hands-free browsing experience.
 - **Counter Display (Optional) ( Keep Track 🚨):** Displays a counter indicating the current page and total number of items, giving users a clear understanding of their position within the carousel.
 
+
+## **✨ NEW FEATURE (navigation 🧭)✨**
+> Optional navigation that is dynamically added based on the amount of children. 
+> - `carousel-navigation:` Control the overall navigation container.
+> - `carousel-navigation-button:` Customize the individual buttons for a cohesive look ✨.
 ## **✨ NEW FEATURE (Flexible Scrolling ↕️↔️)✨**
 > Choose between fluid horizontal scrolling () or intuitive vertical scrolling () for maximum control.  This enhanced flexibility allows you to tailor the carousel's behavior to your specific content and  user needs 😮.
 ##  **✨NEW FEATURE (OnChange callback 🤩)✨**
@@ -20,8 +25,6 @@ This carousel component provides a versatile and performant solution for display
 > - **`Onchange` (function):** Optional callBack that you can pass. The `carousel` will return 
 > its child `index` each time it slides.
 
-## **Reduced Package Size by Removing Popmotion 📦📦**
-> Benefit from a leaner package size thanks to recent optimizations! `popmotion` no longer required and `carousel` component retains its full functionality 🚗💨. 
 
 
 <br>
@@ -62,12 +65,24 @@ function MyComponent() {
 ```
 **⚠️IMPORTANT⚠️:** When creating content dynamically. I.E via mapping, don't forget to add keys for each component.
 
+<br>
 
+**Unleash Your Design Creativity: Styling Freedom**
+
+While the `react-responsive-framer-motion-carousel` provides robust functionality for managing content transitions and user interaction, the real power lies in its **extensive customization options**. This means you have complete control over the carousel's appearance (Meaning figure it out 😆). 
+
+- **No Imposed Styles:** The component doesn't enforce any default styles, allowing you to tailor the carousel's look and feel seamlessly to match your project's unique design language.
+- **CSS Integration:** Leverage the full power of CSS to define styles for various carousel elements like navigation buttons, counters, and individual content items. 
+- **Component Flexibility:**  You're not limited to pre-defined elements. Feel free to integrate your custom components within the carousel for even greater design possibilities. Imagine embedding custom image containers, progress bars, or even interactive elements within each carousel item!
+
+<br>
 
 **Customization Options:**
 - **`className` (string):** Add an additional CSS class name for styling purposes.
 - **`type` (string):** Change animation style of the Carousel. Currently it has `horizontal` (default) and `vertical` mode.
 - **`drag` (boolean, default: `true`):** Enable or disable dragging/swiping functionality.
+- **`range` (number, default: `1000`):** Optional control for the distance the children come in from.
+- **`navigation` (boolean, default: `true`):** Buttons that navigate to the corresponding child. Active `index` is highlighted.
 - **`controls` (boolean, default: `true`):** 
     - Show (true, default) or hide (false) navigation buttons that users can click on to move between carousel items.
     - You can customize the appearance of these buttons using CSS.

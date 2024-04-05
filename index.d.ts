@@ -6,9 +6,17 @@ declare module 'react-responsive-framer-motion-carousel' {
      */
     children: React.ReactNode;
     /**
-     * - An optional CSS class name for additional styling.
+     * -  An optional number (default: `1000`) to set how far the children will move in or out.
+     */
+    range?: number;
+    /**
+     * - An optional CSS className for styling. You should style your outer div to stop overflow. 
      */
     className?: string;
+    /**
+     * - Optional display showing all indexes that can be clicked to navigate.
+     */
+    navigation?: boolean;
     /**
      * - Type of carousel. Possible values: "horizontal", "vertical".
      */
@@ -113,7 +121,9 @@ declare module 'react-responsive-framer-motion-carousel' {
    *
    * @param {Object} props - Props for the carousel component.
    * @param {React.ReactNode} props.children - The content or images to be displayed within the carousel.
-   * @param {string} [props.className] - An optional CSS class name for additional styling.
+   * @param {number} [props.range=1000] - An optional number to set how far the children will move in or out.
+   * @param {string} [props.className] - An optional CSS className for styling. You should style your outer div to stop overflow. 
+   * @param {string} [pros.navigation] className = carousel-navigation : Clasname = carousel-navigation-button - Optional display showing all indexes that can be clicked to navigate.
    * @param {string} [props.type="horizontal"] - Type of carousel. Possible values: "horizontal", "vertical".
    * @param {boolean} [props.drag=true] - A boolean flag (defaults to `true`) that determines whether dragging/swiping functionality should be enabled.
    * @param {boolean} [props.controls=true] - A boolean flag (defaults to `true`) that determines whether control buttons should be enabled.

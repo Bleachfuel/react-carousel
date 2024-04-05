@@ -10,6 +10,10 @@ declare module 'react-responsive-framer-motion-carousel' {
      */
     className?: string;
     /**
+     * - Type of carousel. Possible values: "horizontal", "vertical".
+     */
+    type?: string;
+    /**
      * - A boolean flag (defaults to `true`) that determines whether dragging/swiping functionality should be enabled.
      */
     drag?: boolean;
@@ -68,8 +72,7 @@ declare module 'react-responsive-framer-motion-carousel' {
      */
     intervalActive?: boolean;
     /**
-     * - Optional: Declare a useState function inside here. Whenever the carousel loads, it returns true on the state. Useful for showing that content is being loaded.
-     * - `Important:` The `carousel` will return true to the state when content changes.
+     * - Optional: Callback function that returns the child Index when sliding.
      *   - Example:
      *     ```jsx
      *     import Carousel from 'react-responsive-framer-motion-carousel';
@@ -82,12 +85,15 @@ declare module 'react-responsive-framer-motion-carousel' {
      *       const handleLoad = () => {
      *         setLoading(false);
      *       };
+     *       const handleChange = () => {
+     *         setLoading(true)
+     *       };
      *
      *       return (
      *         <>
      *           // Conditionally render loading if the content is being loaded 
      *           {loading && 'Loading...'}
-     *           <Carousel setLoading={setLoading}>
+     *           <Carousel onChange={handleChange}>
      *             <img onLoad={handleLoad} src="" alt="" />
      *             <img onLoad={handleLoad} src="" alt="" />
      *             <img onLoad={handleLoad} src="" alt="" />
@@ -97,7 +103,7 @@ declare module 'react-responsive-framer-motion-carousel' {
      *     }
      *     ```
      */
-    setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+    onChange?: React.Dispatch<React.SetStateAction<boolean>>;
   }
 
   /** 
@@ -108,6 +114,7 @@ declare module 'react-responsive-framer-motion-carousel' {
    * @param {Object} props - Props for the carousel component.
    * @param {React.ReactNode} props.children - The content or images to be displayed within the carousel.
    * @param {string} [props.className] - An optional CSS class name for additional styling.
+   * @param {string} [props.type="horizontal"] - Type of carousel. Possible values: "horizontal", "vertical".
    * @param {boolean} [props.drag=true] - A boolean flag (defaults to `true`) that determines whether dragging/swiping functionality should be enabled.
    * @param {boolean} [props.controls=true] - A boolean flag (defaults to `true`) that determines whether control buttons should be enabled.
    *@param {Array} [props.counter] - Optional counter configuration (array with two elements).
@@ -121,7 +128,7 @@ declare module 'react-responsive-framer-motion-carousel' {
       - The first element (`interval[0]`) is a boolean flag (defaults to `false`) that determines whether automatic pagination is enabled.
       - The second element (`interval[1]`) is a number (defaults to `0`) that specifies the duration (in seconds) between automatic page transitions.
    * @param {boolean} [props.intervalActive=true] - A boolean flag (defaults to `true`) that controls whether the configured interval (if any) should be actively used. This provides further control over automatic pagination behavior.
-   * @param {} [props.setLoading] - Optional: Declare a useState function inside here. Whenever the carousel loads, it returns true on the state. Useful for showing that content is being loaded.
+   * @param {} [props.onChange] - Callback that returns the index when sliding. Useful for knowing when u should display a loading state.
    * @returns {JSX.Element} The carousel component.
    */
 

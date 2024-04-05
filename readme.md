@@ -1,26 +1,27 @@
 
 ## ✨ React Responsive Framer Motion Carousel ✨
 
-This carousel component provides a versatile and performant solution for displaying content or images within your React applications. It offers intuitive features that enhance user experience and empower developers with granular control over customization.
+This carousel component provides a versatile and performant solution for displaying content or images within your React applications. It offers intuitive features that enhance user experience and empower developers like you with granular control over customization.
 
 **Key Features:**
 
 - **Seamless Swiping ( Touch-friendly ✋):** Enables users to navigate the carousel intuitively using touch gestures on mobile devices or dragging on desktop devices.
 - **Infinite Sliding ( Neverending Loop 🔁):** Users can swipe the carousel indefinitely without hitting a border, creating a smooth and continuous browsing experience.
 - **Navigation Buttons (Optional) (️ Control at your Fingertips 🧭):** Provide optional navigation buttons for users who prefer a more traditional control scheme, allowing them to easily switch between carousel items.
-- **Customizable Transitions ( Smooth & Beautiful 🌸):** Leverages the power of Framer Motion for smooth and customizable transition animations between carousel items, creating a visually appealing flow.
+- **Customizable Transitions ( Smooth & Beautiful 🌸):** Leverage the power of Framer Motion to create stunning transitions between carousel items. Choose from smooth horizontal scrolling () or dynamic vertical scrolling () options to customize the user experience.
 - **Automatic Pagination (Optional) (⏱️ Set it and Forget it):** Allows automatic page transitions after a defined interval, providing a hands-free browsing experience.
 - **Counter Display (Optional) ( Keep Track 🚨):** Displays a counter indicating the current page and total number of items, giving users a clear understanding of their position within the carousel.
 
-
-##  **✨NEW FEATURE (SetLoading 🤩)✨**
-> Ability to get state changes from the `carousel` everytime it loads new content 🚀🔄. 
+## **✨ NEW FEATURE (Flexible Scrolling ↕️↔️)✨**
+> Choose between fluid horizontal scrolling () or intuitive vertical scrolling () for maximum control.  This enhanced flexibility allows you to tailor the carousel's behavior to your specific content and  user needs 😮.
+##  **✨NEW FEATURE (OnChange callback 🤩)✨**
+> Ability to get updates from the `carousel` everytime it's index changes 🚀🔄. 
 > 
-> - **`setLoading` (function):** Optional useState function that you can pass. The `carousel` will return 
-> `true` each time it paginates.
+> - **`Onchange` (function):** Optional callBack that you can pass. The `carousel` will return 
+> its child `index` each time it slides.
 
 ## **Reduced Package Size by Removing Popmotion 📦📦**
-> Previously, I utilized a compact utility function from Popmotion. However, with recent optimizations, it's no longer required. The `carousel` component retains its full functionality without it. While minimizing final package size 🚗💨. 
+> Benefit from a leaner package size thanks to recent optimizations! `popmotion` no longer required and `carousel` component retains its full functionality 🚗💨. 
 
 
 <br>
@@ -65,6 +66,7 @@ function MyComponent() {
 
 **Customization Options:**
 - **`className` (string):** Add an additional CSS class name for styling purposes.
+- **`type` (string):** Change animation style of the Carousel. Currently it has `horizontal` (default) and `vertical` mode.
 - **`drag` (boolean, default: `true`):** Enable or disable dragging/swiping functionality.
 - **`controls` (boolean, default: `true`):** 
     - Show (true, default) or hide (false) navigation buttons that users can click on to move between carousel items.
@@ -81,8 +83,7 @@ function MyComponent() {
     - First element (boolean): Enables automatic pagination (defaults to `false`).
     - Second element (number): Interval duration in seconds (defaults to `0`).
 - **`intervalActive` (boolean, default: `true`):** Useful for controlling the interval. I.E stop the interval when hovering over something. 
-- **`setLoading` (function):** Optional useState function that you can pass. The component will return 
-`true` each time it paginates. More information down below.
+- **`setLoading` (function):** - Callback that returns the index when sliding. Useful for knowing when u should display a `loading` state. More information down below.
 
 **Example with Customization:**
 
@@ -94,7 +95,7 @@ function MyComponent() {
     <Carousel
       className="my-custom-carousel"
       drag={false} // Disable dragging
-      counter={true} // Enable counter
+      counter={[true]} // Enable counter without string
       interval={[true, 3]} // Enable automatic pagination every 3 seconds
       intervalActive={true} // Activate the configured interval
       swipeConfindence={500} // Increase swipe sensitivity
@@ -115,11 +116,15 @@ function MyComponent() {
   const handleLoad = () => {
     setLoading(false)
   }
+  // set loading to true each time the carousel slides
+  const handleChange = () => {
+    setLoading(true)
+  }
   return (
     <>
       {/*conditionally render loading if the content is being loaded*/}
       {loading && "loading..."}
-      <Carousel setLoading={setLoading}>
+      <Carousel onChange={handleChange}>
         <img onLoad={handleLoad} src="" alt="" />
         <img onLoad={handleLoad} src="" alt="" />
         <img onLoad={handleLoad} src="" alt="" />
@@ -129,7 +134,7 @@ function MyComponent() {
 
 }
 ```
-**⚠️IMPORTANT⚠️:** Each time you press the controls or drag the `carousel`, the `carousel` will set loading to `true`
+
 
 
 **Contributing:**

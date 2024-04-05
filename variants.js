@@ -1,4 +1,4 @@
-const variants = {
+export const variants = {
     enter: (direction) => {
         return {
             x: direction > 0 ? 1000 : -1000,
@@ -18,3 +18,23 @@ const variants = {
         };
     }
 };
+export const verticalVariants = {
+    enter: (direction) => {
+        return {
+            y: direction > 0 ? 1000 : -1000,
+            opacity: 0
+        };
+    },
+    center: {
+        zIndex: 2,
+        y: 0,
+        opacity: 1
+    },
+    exit: (direction) => {
+        return {
+            zIndex: 0,
+            y: direction < 0 ? 1000 : -1000,
+            opacity: 0
+        };
+    }
+}

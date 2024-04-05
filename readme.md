@@ -17,20 +17,27 @@ This carousel component provides a versatile and performant solution for display
 > Ability to get state changes from the `carousel` everytime it loads new content 🚀🔄. 
 > 
 > - **`setLoading` (function):** Optional useState function that you can pass. The `carousel` will return 
-> `false` each time it paginates.
+> `true` each time it paginates.
+
+## **Reduced Package Size by Removing Popmotion 📦📦**
+> Previously, I utilized a compact utility function from Popmotion. However, with recent optimizations, it's no longer required. The `carousel` component retains its full functionality without it. While minimizing final package size 🚗💨. 
+
 
 <br>
 <br>
 <br>
-
 
 **Installation:**
 
-Install the `Carousel` component using npm:
+   ```bash
+   npm install react-responsive-framer-motion-carousel
+   ```
 
-```bash
-npm install react-responsive-framer-motion-carousel
-```
+   This single command installs the carousel component along with its necessary dependency `framer-motion` within your project. While you might not directly use `framer-motion` extensively in your code, it provides underlying animation capabilities that power the carousel's functionality. This library is optimized for small file sizes, so the overall impact on your project's final bundle should be minimal.
+
+- **React as a Prerequisite:** Make sure you are using this component inside `react`
+- **Alternative for Non-Animated Carousels:** If animations aren't a requirement in your carousel, you could explore lighter-weight carousel options that don't depend on `framer-motion` 🕊️.
+
 I know that the name is long, but all others were already in use 😥😥
 
 
@@ -45,13 +52,15 @@ function MyComponent() {
   return (
     <Carousel>
         {/* Replace with your carousel content */}
-        <div key="1"></div>
-        <div key="2"></div>
-        <div key="3"></div>
+        <div id="1"></div>
+        <div id="2"></div>
+        <div id="3"></div>
     </Carousel>
   );
 }
 ```
+**⚠️IMPORTANT⚠️:** When creating content dynamically. I.E via mapping, don't forget to add keys for each component.
+
 
 
 **Customization Options:**
@@ -66,7 +75,7 @@ function MyComponent() {
         - `true`: Displays the counter.
         - `false`: Hides the counter.
     - Element 1 (string, optional): Custom string to display before the counter (if `counter[0]` is `true`). If omitted, an empty string is displayed. 
-- **`noExit` (boolean, default: `false`):** Useful for debugging rendering issues; disables exit animation.
+- **`noExit` (boolean, default: `false`):** Useful for stopping rendering issues with large objects; disables exit animation.
 - **`swipeConfindence` (number, default: `1000`):** Adjust the sensitivity of swipe detection. Lower values make swiping easier, higher values make it harder.
 - **`interval` (array, default: `[false, 0]`):** Configure automatic pagination:
     - First element (boolean): Enables automatic pagination (defaults to `false`).
@@ -120,7 +129,7 @@ function MyComponent() {
 
 }
 ```
-**⚠️IMPORTANT⚠️:** Each time you press the controls or drag the `carousel`, the `carousel` will set loading to `false`
+**⚠️IMPORTANT⚠️:** Each time you press the controls or drag the `carousel`, the `carousel` will set loading to `true`
 
 
 **Contributing:**

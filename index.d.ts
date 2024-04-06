@@ -1,12 +1,18 @@
 
 declare module 'react-responsive-framer-motion-carousel' {
+  export interface CarouselRef {
+    /**
+     * - Use the paginate function from the `carousel` externally (paginate(1), paginate(-1))
+     */
+    ref: React.Ref
+  }
   export interface CarouselProps {
     /**
      * - The content or images to be displayed within the carousel.
      */
     children: React.ReactNode;
     /**
-     * -  An optional number (default: `1000`) to set how far the children will move in or out.
+     * -  An optional number (default: `1000`) to set how far the children will animate in or out.
      */
     range?: number;
     /**
@@ -80,6 +86,10 @@ declare module 'react-responsive-framer-motion-carousel' {
      */
     intervalActive?: boolean;
     /**
+     * - Optional number u can pass to set the Index of the `carousel`. Remember child 1 is index 0 
+     */
+    goToIndex?: number;
+    /**
      * - Optional: Callback function that returns the child Index when sliding.
      *   - Example:
      *     ```jsx
@@ -121,7 +131,7 @@ declare module 'react-responsive-framer-motion-carousel' {
    *
    * @param {Object} props - Props for the carousel component.
    * @param {React.ReactNode} props.children - The content or images to be displayed within the carousel.
-   * @param {number} [props.range=1000] - An optional number to set how far the children will move in or out.
+   * @param {number} [props.range=1000] - An optional number to set how far the children will animate in or out.
    * @param {string} [props.className] - An optional CSS className for styling. You should style your outer div to stop overflow. 
    * @param {string} [pros.navigation] className = carousel-navigation : Clasname = carousel-navigation-button - Optional display showing all indexes that can be clicked to navigate.
    * @param {string} [props.type="horizontal"] - Type of carousel. Possible values: "horizontal", "vertical".
@@ -138,10 +148,12 @@ declare module 'react-responsive-framer-motion-carousel' {
       - The first element (`interval[0]`) is a boolean flag (defaults to `false`) that determines whether automatic pagination is enabled.
       - The second element (`interval[1]`) is a number (defaults to `0`) that specifies the duration (in seconds) between automatic page transitions.
    * @param {boolean} [props.intervalActive=true] - A boolean flag (defaults to `true`) that controls whether the configured interval (if any) should be actively used. This provides further control over automatic pagination behavior.
+   * @param {number} [props.goToIndex] - Optional number u can pass to set the Index of the `carousel`. Remember child 1 is index 0 
    * @param {} [props.onChange] - Callback that returns the index when sliding. Useful for knowing when u should display a loading state.
+   * @param {ref}[ref] - Use the paginate function from the `carousel` externally (paginate(1), paginate(-1))
    * @returns {JSX.Element} The carousel component.
    */
 
-  export default function Carousel(props: CarouselProps): JSX.Element;
+  export default function Carousel(props: CarouselProps, ref: CarouselRef): JSX.Element;
 }
 

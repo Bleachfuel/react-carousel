@@ -12,14 +12,21 @@ This carousel component provides a versatile and performant solution for display
 - **Automatic Pagination (Optional) (⏱️ Set it and Forget it):** Allows automatic page transitions after a defined interval, providing a hands-free browsing experience.
 - **Counter Display (Optional) ( Keep Track 🚨):** Displays a counter indicating the current page and total number of items, giving users a clear understanding of their position within the carousel.
 
+**Version 1.5.0**
+## **✨ NEW FEATURE (external pagination 🪐) ✨**
+> U can now reference the paginate function outside of the `carousel`. Useful when your `<button>` should be in a different place as the `carousel`, more information down below.
+## **✨ NEW FEATURE (GoToIndex 🔢) ✨**
+> Enter a number in the prop and the `carousel` will move to the according index.
 
+
+**Version 1.4.0**
 ## **✨ NEW FEATURE (navigation 🧭)✨**
 > Optional navigation that is dynamically added based on the amount of children. 
 > - `carousel-navigation:` Control the overall navigation container.
 > - `carousel-navigation-button:` Customize the individual buttons for a cohesive look ✨.
 ## **✨ NEW FEATURE (Flexible Scrolling ↕️↔️)✨**
 > Choose between fluid horizontal scrolling () or intuitive vertical scrolling () for maximum control.  This enhanced flexibility allows you to tailor the carousel's behavior to your specific content and  user needs 😮.
-##  **✨NEW FEATURE (OnChange callback 🤩)✨**
+## **✨NEW FEATURE (OnChange callback 🤩)✨**
 > Ability to get updates from the `carousel` everytime it's index changes 🚀🔄. 
 > 
 > - **`Onchange` (function):** Optional callBack that you can pass. The `carousel` will return 
@@ -65,7 +72,9 @@ function MyComponent() {
 ```
 **⚠️IMPORTANT⚠️:** When creating content dynamically. I.E via mapping, don't forget to add keys for each component.
 
-<br>
+**⚠️IMPORTANT⚠️:** If not using fullscreen mode, ensure the outer `<div>` has a fixed width, `display: flex`, and centers the carousel component. Set `overflow` to `hidden` or adjust the `range` prop. This prevents the carousel from extending beyond its boundaries. 
+
+----
 
 **Unleash Your Design Creativity: Styling Freedom**
 
@@ -81,7 +90,7 @@ While the `react-responsive-framer-motion-carousel` provides robust functionalit
 - **`className` (string):** Add an additional CSS class name for styling purposes.
 - **`type` (string):** Change animation style of the Carousel. Currently it has `horizontal` (default) and `vertical` mode.
 - **`drag` (boolean, default: `true`):** Enable or disable dragging/swiping functionality.
-- **`range` (number, default: `1000`):** Optional control for the distance the children come in from.
+- **`range` (number, default: `1000`):** Optional control for the distance the children animate in from.
 - **`navigation` (boolean, default: `true`):** Buttons that navigate to the corresponding child. Active `index` is highlighted.
 - **`controls` (boolean, default: `true`):** 
     - Show (true, default) or hide (false) navigation buttons that users can click on to move between carousel items.
@@ -98,7 +107,9 @@ While the `react-responsive-framer-motion-carousel` provides robust functionalit
     - First element (boolean): Enables automatic pagination (defaults to `false`).
     - Second element (number): Interval duration in seconds (defaults to `0`).
 - **`intervalActive` (boolean, default: `true`):** Useful for controlling the interval. I.E stop the interval when hovering over something. 
-- **`setLoading` (function):** - Callback that returns the index when sliding. Useful for knowing when u should display a `loading` state. More information down below.
+- **`goToIndex` (number):** - Number u can pass to the `carousel` that will set the index. Remember child 1 is index 0  (navigation does the same, but this is if you want to implement your custom logic).
+- **`onChange` (function):** - Callback that returns the index when sliding. Useful for knowing when u should display a `loading` state. More information down below.
+- **`ref` (React.ref):** - Use the paginate function from the `carousel` externally (paginate(1), paginate(-1))
 
 **Example with Customization:**
 
@@ -119,13 +130,21 @@ function MyComponent() {
 }
 ```
 
-**Example with loading**
+**Example with loading, useRef and goToIndex:**
+
+Even tho, the paginate `function` can be accessed outside of the `carousel` component. It is better to use the buttons provided and style them based on your needs. 
+
 ```javascript
 import Carousel from 'react-responsive-framer-motion-carousel';
-import { useState } from "react"
+import { useRef, useState } from 'react';
 
 function MyComponent() {
+  // get the carouselRef
+  const carouselRef = useRef(null);
+  // state for loading
   const [loading, setLoading] = useState(true)
+  // setting the index externally, again better to use the navigation provided by the carousel and style accordingly
+  const [index, setIndex] = useState(null)
 
   // set loading to false when the image is loaded.
   const handleLoad = () => {
@@ -139,14 +158,18 @@ function MyComponent() {
     <>
       {/*conditionally render loading if the content is being loaded*/}
       {loading && "loading..."}
-      <Carousel onChange={handleChange}>
+      <Carousel ref={carouselRef} onChange={handleChange} goToIndex={index}>
         <img onLoad={handleLoad} src="" alt="" />
         <img onLoad={handleLoad} src="" alt="" />
         <img onLoad={handleLoad} src="" alt="" />
       </Carousel>
+      {/*external pagination*/}
+      <button onClick={() => carouselRef.current?.paginate(-1)}>prev</button>
+      <button onClick={() => carouselRef.current?.paginate(1)}>next</button>
+      {/*change the index (This will give the previous animation)*/}
+      <input type="number" onChange={(e) => setIndex(e.target.value)} />
     </>
 )
-
 }
 ```
 

@@ -13,17 +13,17 @@ This carousel component provides a versatile and performant solution for display
 - **Counter Display (Optional) ( Keep Track 🚨):** Displays a counter indicating the current page and total number of items, giving users a clear understanding of their position within the carousel.
 
 **Version 1.5.0**
-## **✨ NEW FEATURE (external pagination 🪐) ✨**
-> U can now reference the paginate function outside of the `carousel`. Useful when your `<button>` should be in a different place as the `carousel`, more information down below.
-## **✨ NEW FEATURE (GoToIndex 🔢) ✨**
-> Enter a number in the prop and the `carousel` will move to the according index.
-
+This update brings a trio of powerful new features that elevate your carousel game to the next level:
+## **✨ NEW FEATURE (Take Control of the Distance! (range prop)) ✨**
+> Now you can fine-tune the animation distance for your carousel children! Crank up the `range` value and watch your content fly across the screen with blazing speed and extended travel 🚗💨. It's perfect for creating those eye-catching, dynamic transitions you've been dreaming of 💭.
+## **✨ NEW FEATURE (External Pagination Power 🪐) ✨**
+> Break free from the confines of the carousel itself! The `ref` and `paginate` combo lets you place your pagination controls anywhere you like. Need those navigation buttons on the top right corner of your layout? No problem! This flexibility gives you complete control over the user experience 🎛️.
+## **✨ NEW FEATURE (Go Directly to Your Content 🔢) ✨**
+> Say goodbye to endless scrolling👋! With the goToIndex prop, you can programmatically navigate the carousel to any specific index. This is perfect for situations where you want to directly jump to a particular content section based on user interactions or other logic within your application ✈️.
 
 **Version 1.4.0**
-## **✨ NEW FEATURE (navigation 🧭)✨**
-> Optional navigation that is dynamically added based on the amount of children. 
-> - `carousel-navigation:` Control the overall navigation container.
-> - `carousel-navigation-button:` Customize the individual buttons for a cohesive look ✨.
+## **✨ NEW FEATURE (Navigation 🧭)✨**
+> No more manual configuration! The carousel now automatically generates a sleek navigation bar based on the number of children you provide. Customize the overall container with the `carousel-navigation` class and individual buttons with `carousel-navigation-button` for a seamless visual experience. ✨.
 ## **✨ NEW FEATURE (Flexible Scrolling ↕️↔️)✨**
 > Choose between fluid horizontal scrolling () or intuitive vertical scrolling () for maximum control.  This enhanced flexibility allows you to tailor the carousel's behavior to your specific content and  user needs 😮.
 ## **✨NEW FEATURE (OnChange callback 🤩)✨**
